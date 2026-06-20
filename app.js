@@ -329,8 +329,7 @@
 
   // URL a la que Tiendanube redirige luego de que el usuario autoriza la app.
   // Debe coincidir EXACTAMENTE con la configurada en el panel de partners de Tiendanube.
-  const TIENDANUBE_REDIRECT_URI =
-'https://cartboost-v2.onrender.com/oauth/callback';
+  const TIENDANUBE_REDIRECT_URI = 'https://cartboost-v2.onrender.com/oauth/callback';
 
   // Scopes que la app solicita. Ajustar según los permisos que CartBoost necesite.
   // Referencia: https://tiendanube.github.io/api-documentation/authentication
@@ -784,11 +783,11 @@
      parámetros simples en la URL para que esta página sepa qué pantalla
      mostrar. Ejemplo de redirección final que tu backend debería hacer:
      
-       https://tuapp.com/?cb_step=success&store_id=123&store_name=Mi+Tienda
+       https://cartboost-v2.onrender.com/?cb_step=success&store_id=123&store_name=Mi+Tienda
      
      o, en caso de error:
      
-       https://tuapp.com/?cb_step=error&reason=access_denied
+       https://cartboost-v2.onrender.com/?cb_step=error&reason=access_denied
      ===================================================== */
 
   function handleOAuthReturnParams() {
@@ -896,6 +895,7 @@
   const dashWidgets = $('#cbDashWidgets');
   const dashUserName = $('#cbDashUserName');
   const dashAvatar = $('#cbDashAvatar');
+  const sidebarStoreName = $('#cbSidebarStoreName');
 
   /* -----------------------------------------------------
      fetchStoreData()
@@ -941,6 +941,7 @@
     cbState.store = data;
 
     if (dashStoreName) dashStoreName.textContent = data.name;
+    if (sidebarStoreName) sidebarStoreName.textContent = data.name;
     if (dashProducts) dashProducts.textContent = data.productsCount.toLocaleString('es-AR');
     activeWidgetsCount = data.widgetsActive || 0;
     if (dashWidgets) dashWidgets.textContent = activeWidgetsCount;
@@ -970,32 +971,214 @@
   // Sincronización manual de productos (botón dentro de la card "Productos").
   // Mismo patrón que Wigy: el usuario la dispara si sospecha que el catálogo
   // no se actualizó solo después de un cambio en Tiendanube.
+  //
+  // Extraída a función para que tanto el botón de la card de Productos como
+  // el botón "Sincronizar Productos" de Acciones Rápidas llamen exactamente
+  // a la misma lógica real (sin duplicarla ni simularla dos veces distintas).
+  async function runProductSync(triggerBtn) {
+    if (triggerBtn) {
+      triggerBtn.classList.add('syncing');
+      triggerBtn.disabled = true;
+    }
+
+    try {
+      // TODO: conectar backend real. Reemplazar por:
+      //   const res = await fetch(`${API_BASE_URL}/store/${cbState.store?.id}/sync`, {
+      //     method: 'POST', credentials: 'include'
+      //   });
+      //   if (!res.ok) throw new Error('No se pudo sincronizar.');
+      //   const { productsCount } = await res.json();
+      //   if (dashProducts) dashProducts.textContent = productsCount.toLocaleString('es-AR');
+      //
+      // FALTA PARA PRODUCCIÓN: endpoint POST /api/store/:id/sync en tu backend,
+      // que vuelva a consultar la API de Tiendanube y devuelva el conteo actualizado.
+      console.warn('[CartBoost] Sincronización manual sin backend real todavía.');
+      await new Promise(resolve => setTimeout(resolve, 900));
+
+      showToast('Sin backend conectado: no hay datos reales para sincronizar todavía.', 'info');
+    } catch (err) {
+      showToast(err.message || 'No se pudo sincronizar los productos.', 'error');
+    } finally {
+      if (triggerBtn) {
+        triggerBtn.classList.remove('syncing');
+        triggerBtn.disabled = false;
+      }
+    }
+  }
+
   const syncProductsBtn = $('#cbSyncProductsBtn');
   if (syncProductsBtn) {
-    syncProductsBtn.addEventListener('click', async () => {
-      syncProductsBtn.classList.add('syncing');
-      syncProductsBtn.disabled = true;
+    syncProductsBtn.addEventListener('click', () => runProductSync(syncProductsBtn));
+  }
 
-      try {
-        // TODO: conectar backend real. Reemplazar por:
-        //   const res = await fetch(`${API_BASE_URL}/store/${cbState.store?.id}/sync`, {
-        //     method: 'POST', credentials: 'include'
-        //   });
-        //   if (!res.ok) throw new Error('No se pudo sincronizar.');
-        //   const { productsCount } = await res.json();
-        //
-        // FALTA PARA PRODUCCIÓN: endpoint POST /api/store/:id/sync en tu backend,
-        // que vuelva a consultar la API de Tiendanube y devuelva el conteo actualizado.
-        console.warn('[CartBoost] Sincronización manual sin backend real todavía.');
-        await new Promise(resolve => setTimeout(resolve, 900));
+  const quickSyncBtn = $('#cbQuickSyncProducts');
+  if (quickSyncBtn) {
+    quickSyncBtn.addEventListener('click', () => runProductSync(quickSyncBtn));
+  }
 
-        showToast('Sin backend conectado: no hay datos reales para sincronizar todavía.', 'info');
-      } catch (err) {
-        showToast(err.message || 'No se pudo sincronizar los productos.', 'error');
-      } finally {
-        syncProductsBtn.classList.remove('syncing');
-        syncProductsBtn.disabled = false;
+  /* =====================================================
+     SIDEBAR (mobile drawer / desktop fijo) + HAMBURGUESA
+     ===================================================== */
+  const dashHamburger = $('#cbDashHamburger');
+  const sidebar = $('#cbSidebar');
+  const sidebarOverlay = $('#cbSidebarOverlay');
+  const sidebarClose = $('#cbSidebarClose');
+
+  function openSidebar() {
+    if (!sidebar) return;
+    sidebar.classList.add('open');
+    if (sidebarOverlay) sidebarOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    if (!sidebar) return;
+    sidebar.classList.remove('open');
+    if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  if (dashHamburger) dashHamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+  // Navegación del sidebar: marca el link activo. Las secciones de
+  // Widgets/Productos/Configuración/Facturación todavía no existen como
+  // pantallas propias — eso queda fuera de este cambio (solo se pidió
+  // rediseñar el Dashboard). Por ahora, navegar cierra el sidebar y avisa
+  // si la sección todavía no está implementada.
+  $$('.cb-sidebar-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      $$('.cb-sidebar-link').forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      closeSidebar();
+
+      const section = link.dataset.nav;
+      if (section && section !== 'dashboard') {
+        showToast(`La sección "${link.textContent.trim()}" todavía no está implementada.`, 'info');
       }
+    });
+  });
+
+  // Botón de configuración junto a la tienda conectada (sidebar).
+  // Sin pantalla de configuración propia todavía — feedback honesto.
+  const sidebarStoreGear = $('#cbSidebarStoreGear');
+  if (sidebarStoreGear) {
+    sidebarStoreGear.addEventListener('click', () => {
+      showToast('La configuración de la tienda todavía no está implementada.', 'info');
+    });
+  }
+
+  // Flecha para desplegar más opciones de la tienda conectada.
+  // Por ahora solo anima el ícono; sin un submenú real conectado todavía.
+  const sidebarStoreExpand = $('#cbSidebarStoreExpand');
+  if (sidebarStoreExpand) {
+    sidebarStoreExpand.addEventListener('click', () => {
+      sidebarStoreExpand.classList.toggle('open');
+      showToast('Opciones adicionales de la tienda: todavía no implementadas.', 'info');
+    });
+  }
+
+  /* =====================================================
+     MENÚ DESPLEGABLE DEL AVATAR (header)
+     ===================================================== */
+  const dashUserBtn = $('#cbDashUserBtn');
+  const avatarMenu = $('#cbAvatarMenu');
+
+  function toggleAvatarMenu(forceClose) {
+    if (!avatarMenu || !dashUserBtn) return;
+    const willOpen = forceClose ? false : !avatarMenu.classList.contains('open');
+    avatarMenu.classList.toggle('open', willOpen);
+    avatarMenu.classList.toggle('hidden', !willOpen);
+    dashUserBtn.setAttribute('aria-expanded', String(willOpen));
+  }
+
+  if (dashUserBtn) {
+    dashUserBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleAvatarMenu();
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (avatarMenu && !avatarMenu.classList.contains('hidden') &&
+        !avatarMenu.contains(e.target) && e.target !== dashUserBtn) {
+      toggleAvatarMenu(true);
+    }
+  });
+
+  $$('.cb-avatar-menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      toggleAvatarMenu(true);
+      const action = item.dataset.action;
+
+      if (action === 'logout') {
+        // Cierre de sesión local: limpia el estado de onboarding guardado
+        // y vuelve a la landing. No hay backend de sesión real conectado
+        // todavía (mismo patrón ya documentado en handleEmailLogin/Register).
+        localStorage.removeItem('cb_store_connected');
+        localStorage.removeItem('cb_store_name');
+        localStorage.removeItem('cb_tutorial_done');
+        cbState.user = null;
+        cbState.store = null;
+        showScreen(null);
+        document.body.style.overflow = '';
+        showToast('Sesión cerrada.', 'success');
+      } else if (action === 'account') {
+        showToast('La sección "Mi cuenta" todavía no está implementada.', 'info');
+      } else if (action === 'store') {
+        showToast('La sección "Mi tienda" todavía no está implementada.', 'info');
+      } else if (action === 'help') {
+        showToast('Centro de ayuda: todavía no está conectado a un destino real.', 'info');
+      }
+    });
+  });
+
+  /* =====================================================
+     WIDGETS RECIENTES — botones "Ver" / "Crear widget"
+     =====================================================
+     Estos botones no tienen todavía una pantalla de listado de widgets
+     ni un modal de creación real conectados a backend. Se les da feedback
+     honesto en vez de simular una acción que no existe.
+     ===================================================== */
+  ['#cbViewWidgetsBtn', '#cbEmptyViewWidgetsBtn'].forEach(sel => {
+    const btn = $(sel);
+    if (btn) btn.addEventListener('click', () => {
+      showToast('El listado completo de widgets todavía no está implementado.', 'info');
+    });
+  });
+
+  ['#cbCreateWidgetBtn', '#cbEmptyCreateWidgetBtn'].forEach(sel => {
+    const btn = $(sel);
+    if (btn) btn.addEventListener('click', () => {
+      // Si existe al menos un widget en la grilla de tipos, llevamos foco ahí
+      // como siguiente paso lógico (igual que hace Wigy: te manda a elegir tipo).
+      const widgetsSection = $('.cb-dash-widgets-section');
+      if (widgetsSection) {
+        widgetsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Elegí un tipo de widget para activarlo.', 'info');
+      }
+    });
+  });
+
+  /* =====================================================
+     ACCIONES RÁPIDAS — Ver Productos / Ver Widgets
+     =====================================================
+     Mismo criterio: sin pantalla de Productos/Widgets propia todavía.
+     ===================================================== */
+  const quickViewProducts = $('#cbQuickViewProducts');
+  if (quickViewProducts) {
+    quickViewProducts.addEventListener('click', () => {
+      showToast('La vista de Productos todavía no está implementada.', 'info');
+    });
+  }
+
+  const quickViewWidgets = $('#cbQuickViewWidgets');
+  if (quickViewWidgets) {
+    quickViewWidgets.addEventListener('click', () => {
+      const widgetsSection = $('.cb-dash-widgets-section');
+      if (widgetsSection) widgetsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
