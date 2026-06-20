@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CartBoost — Convertí visitas en ventas reales</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== LANDING PAGE ===================== -->
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CartBoost</span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#caracteristicas" class="nav-link">Características</a>
+        <a href="#widgets" class="nav-link">Widgets</a>
+        <a href="#precios" class="nav-link">Precios</a>
+        <a href="#soporte" class="nav-link">Soporte</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#" class="btn btn-primary try-btn">Probar Gratis</a>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="container hero-inner">
+      <div class="hero-content reveal fade-up">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Hecho para Tiendanube
+        </div>
+        <h1 class="hero-title">
+          Aumentá tus ventas con
+          <span class="hero-highlight">widgets inteligentes</span>
+        </h1>
+        <p class="hero-subtitle">
+          Convertí más visitantes en compradores utilizando herramientas de CRO diseñadas para Tiendanube.
+        </p>
+        <div class="hero-checks">
+          <span class="hero-check"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#2563EB"/><path d="M5 9l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 7 días de prueba gratis</span>
+          <span class="hero-check"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#2563EB"/><path d="M5 9l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Sin tarjeta de crédito</span>
+          <span class="hero-check"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#2563EB"/><path d="M5 9l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte 24/7</span>
+        </div>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary btn-lg btn-shine try-btn">Probar Gratis →</a>
+          <a href="#" class="btn btn-ghost btn-lg" data-action="demo" aria-label="Demo — próximamente disponible" title="Demo próximamente">Ver Demo</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal fade-left" id="heroVisual">
+        <div class="hero-mockup">
+          <div class="mockup-window">
+            <div class="mockup-bar">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="mockup-url">cartboost.app/dashboard</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-header-row">
+                <span class="mockup-tag">🔥 Black Friday</span>
+                <span class="mockup-timer">06 : 21 : 28</span>
+              </div>
+              <div class="mockup-widget-row">
+                <div class="mockup-product">
+                  <div class="mockup-img-ph"></div>
+                  <div class="mockup-info">
+                    <span class="mockup-name">Pack x1</span>
+                    <span class="mockup-price">$35.600</span>
+                  </div>
+                </div>
+                <div class="mockup-product selected">
+                  <div class="mockup-img-ph blue"></div>
+                  <div class="mockup-info">
+                    <span class="mockup-name">Pack x2 <span class="badge-mas-vendido">MÁS VENDIDO</span></span>
+                    <span class="mockup-price">$65.504</span>
+                  </div>
+                </div>
+                <div class="mockup-product">
+                  <div class="mockup-img-ph"></div>
+                  <div class="mockup-info">
+                    <span class="mockup-name">Pack x3</span>
+                    <span class="mockup-price">$85.000</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mockup-review-row">
+                <span class="stars">★★★★★</span>
+                <span class="review-count">4,8 · 24 reseñas</span>
+              </div>
+              <div class="mockup-stock-alert">
+                <span class="pulse-dot"></span> ¡Solo quedan <b>3 unidades!</b>
+              </div>
+              <button class="mockup-btn">Agregar al carrito</button>
+            </div>
+          </div>
+          <div class="floating-badge fb1">+18% conversión</div>
+          <div class="floating-badge fb2">⭐ 5.0</div>
+          <div class="floating-badge fb3">🚚 Envío gratis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section" id="caracteristicas">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card reveal fade-up" data-delay="0">
+          <span class="stat-number" data-target="3200" data-prefix="+">0</span>
+          <span class="stat-label">Tiendas activas</span>
+        </div>
+        <div class="stat-card reveal fade-up" data-delay="100">
+          <span class="stat-number" data-target="18" data-prefix="+" data-suffix="%">0</span>
+          <span class="stat-label">Conversión promedio</span>
+        </div>
+        <div class="stat-card reveal fade-up" data-delay="200">
+          <span class="stat-number" data-target="27" data-prefix="+" data-suffix="%">0</span>
+          <span class="stat-label">Ticket promedio</span>
+        </div>
+        <div class="stat-card reveal fade-up" data-delay="300">
+          <span class="stat-number" data-target="98" data-suffix="%">0</span>
+          <span class="stat-label">Satisfacción</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDGETS -->
+  <section class="widgets-section" id="widgets">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <span class="section-eyebrow">Herramientas CRO</span>
+        <h2 class="section-title">Todo lo que necesitás para vender más</h2>
+        <p class="section-subtitle">Widgets inteligentes que se instalan en minutos y funcionan desde el primer día.</p>
+      </div>
+      <div class="widgets-grid">
+        <div class="widget-card reveal fade-up" data-delay="0">
+          <div class="widget-icon">🔥</div>
+          <h3 class="widget-name">Countdown Timer</h3>
+          <p class="widget-desc">Creá urgencia real con contadores de tiempo para ofertas, lanzamientos y eventos especiales.</p>
+          <span class="widget-arrow">→</span>
+        </div>
+        <div class="widget-card reveal fade-up" data-delay="80">
+          <div class="widget-icon">🛒</div>
+          <h3 class="widget-name">Bundle Builder</h3>
+          <p class="widget-desc">Armá packs y combos irresistibles para aumentar el ticket promedio de cada venta.</p>
+          <span class="widget-arrow">→</span>
+        </div>
+        <div class="widget-card reveal fade-up" data-delay="160">
+          <div class="widget-icon">⭐</div>
+          <h3 class="widget-name">Reviews</h3>
+          <p class="widget-desc">Mostrá reseñas auténticas de clientes para generar confianza y acelerar la decisión de compra.</p>
+          <span class="widget-arrow">→</span>
+        </div>
+        <div class="widget-card reveal fade-up" data-delay="240">
+          <div class="widget-icon">🚚</div>
+          <h3 class="widget-name">Envío Gratis</h3>
+          <p class="widget-desc">Indicá cuánto falta para el envío gratis y motivá al cliente a agregar más productos al carrito.</p>
+          <span class="widget-arrow">→</span>
+        </div>
+        <div class="widget-card reveal fade-up" data-delay="320">
+          <div class="widget-icon">💬</div>
+          <h3 class="widget-name">Alertas de Stock</h3>
+          <p class="widget-desc">Avisá cuando hay pocas unidades y creá escasez inteligente que impulse la compra inmediata.</p>
+          <span class="widget-arrow">→</span>
+        </div>
+        <div class="widget-card reveal fade-up" data-delay="400">
+          <div class="widget-icon">🎥</div>
+          <h3 class="widget-name">Slider de Videos</h3>
+          <p class="widget-desc">Mostrá videos de producto en un slider interactivo para aumentar la confianza del comprador.</p>
+          <span class="widget-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="benefits-section">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <span class="section-eyebrow">Resultados reales</span>
+        <h2 class="section-title">Tres palancas de crecimiento</h2>
+      </div>
+      <div class="benefit-block reveal fade-up">
+        <div class="benefit-content">
+          <span class="benefit-number">01</span>
+          <h3 class="benefit-title">Impulsá tu tasa de conversión</h3>
+          <p class="benefit-desc">Captá la atención de tus visitantes con mensajes destacados, videos, alertas y banners que resalten tus productos y ofertas especiales. Cada widget está optimizado para convertir.</p>
+          <a href="#" class="btn btn-primary btn-shine try-btn">Ver widgets de conversión →</a>
+        </div>
+        <div class="benefit-visual">
+          <div class="benefit-mockup">
+            <div class="bm-header">Impulsá tu tasa de conversión</div>
+            <div class="bm-item">
+              <span class="bm-badge red">20% OFF extra</span>
+              <span class="bm-copy">Copiar</span>
+            </div>
+            <div class="bm-row">
+              <span class="bm-tag orange">¡Oferta sorpresa!</span>
+              <span class="bm-tag pink">¡Últimas en stock!</span>
+            </div>
+            <div class="bm-timer-bar">
+              <span class="bm-label">Black Friday 🔥</span>
+              <span class="bm-time">06:21:28</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-block reverse reveal fade-up">
+        <div class="benefit-content">
+          <span class="benefit-number">02</span>
+          <h3 class="benefit-title">Incrementá el ticket promedio</h3>
+          <p class="benefit-desc">Ofrecé bundles y promociones especiales para incentivar a tus clientes a comprar más. El Bundle Builder crea combos irresistibles que aumentan el valor de cada orden.</p>
+          <a href="#" class="btn btn-primary btn-shine try-btn">Ver Bundle Builder →</a>
+        </div>
+        <div class="benefit-visual">
+          <div class="benefit-mockup">
+            <div class="bm-header">Armá tu pack <span class="bm-off">HASTA 25% OFF</span></div>
+            <div class="bm-bundle-row">
+              <div class="bm-bundle-item">
+                <span class="bm-radio active"></span>
+                <span>Pack x1</span>
+                <span class="bm-p">$35.600</span>
+              </div>
+              <div class="bm-bundle-item selected">
+                <span class="bm-radio selected-r"></span>
+                <span>Pack x2 <span class="badge-mas-vendido">MÁS VENDIDO</span></span>
+                <span class="bm-p">$65.504</span>
+              </div>
+              <div class="bm-bundle-item">
+                <span class="bm-radio"></span>
+                <span>Pack x3 <span class="bm-badge-green">ENVÍO GRATIS</span></span>
+                <span class="bm-p">$85.000</span>
+              </div>
+            </div>
+            <button class="bm-cta">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-block reveal fade-up">
+        <div class="benefit-content">
+          <span class="benefit-number">03</span>
+          <h3 class="benefit-title">Generá confianza genuina</h3>
+          <p class="benefit-desc">Mostrá reseñas y widgets que generen confianza para que tus clientes se sientan seguros al momento de comprar. La prueba social impulsa las conversiones de manera consistente.</p>
+          <a href="#" class="btn btn-primary btn-shine try-btn">Ver widgets de confianza →</a>
+        </div>
+        <div class="benefit-visual">
+          <div class="benefit-mockup">
+            <div class="bm-review-row">
+              <div class="bm-avatar"></div>
+              <div>
+                <span class="bm-reviewer">Mariana ★★★★★</span>
+                <p class="bm-review-text">Muy buena experiencia, atención impecable, todo funcionó perfecto.</p>
+              </div>
+            </div>
+            <div class="bm-rating-row">
+              <span class="bm-big-rating">4,8</span>
+              <span class="bm-stars">★★★★★</span>
+              <span class="bm-rating-count">24 reseñas</span>
+              <button class="bm-write">Escribir reseña</button>
+            </div>
+            <div class="bm-shipping-now">
+              <span class="pulse-dot"></span>
+              Comprando ahora tu pedido se despacha <b>HOY</b>
+              <span class="bm-countdown">0h 35m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="how-section">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <span class="section-eyebrow">Setup en minutos</span>
+        <h2 class="section-title">Cuatro pasos para vender más</h2>
+        <p class="section-subtitle">Sin código, sin complicaciones. Funciona desde el primer día.</p>
+      </div>
+      <div class="steps-timeline">
+        <div class="step reveal fade-up" data-delay="0">
+          <div class="step-number">01</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <h4 class="step-title">Instalá CartBoost</h4>
+            <p class="step-desc">Instalá la app desde el App Store de Tiendanube en un solo clic. Sin técnicos ni desarrolladores.</p>
+          </div>
+        </div>
+        <div class="step reveal fade-up" data-delay="100">
+          <div class="step-number">02</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <h4 class="step-title">Conectá Tiendanube</h4>
+            <p class="step-desc">Tu tienda se sincroniza automáticamente. CartBoost lee tu catálogo, precios y stock al instante.</p>
+          </div>
+        </div>
+        <div class="step reveal fade-up" data-delay="200">
+          <div class="step-number">03</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <h4 class="step-title">Activá tus widgets</h4>
+            <p class="step-desc">Elegí qué widgets mostrar, personalizá colores y textos para que se adapten a tu marca.</p>
+          </div>
+        </div>
+        <div class="step reveal fade-up" data-delay="300">
+          <div class="step-number">04</div>
+          <div class="step-connector last"></div>
+          <div class="step-body">
+            <h4 class="step-title">Vendé más desde hoy</h4>
+            <p class="step-desc">Tus widgets empiezan a convertir desde el primer visitante. Medí resultados en tiempo real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <span class="section-eyebrow">Lo que dicen nuestros clientes</span>
+        <h2 class="section-title">+3200 tiendas ya venden más</h2>
+      </div>
+      <div class="testimonials-track-wrapper reveal fade-up">
+        <div class="testimonials-track" id="testimonialsTrack">
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Desde que instalé CartBoost mi conversión subió un 22%. El Bundle Builder es una locura, mis clientes arman sus propios packs y gastan el doble."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#2563EB"></div>
+              <div><strong>Valentina R.</strong><span>Indumentaria · Buenos Aires</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"El Countdown Timer para el Black Friday fue increíble. Generé más ventas en 48 hs que en todo el mes anterior. Totalmente recomendado."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#7C3AED"></div>
+              <div><strong>Martín G.</strong><span>Electrónica · Córdoba</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Las alertas de stock hacen que mis clientes compren más rápido. El widget de reseñas generó una confianza brutal en mi tienda nueva."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#059669"></div>
+              <div><strong>Luciana M.</strong><span>Cosméticos · Rosario</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Instalé todo en 10 minutos sin saber nada de código. Mi ticket promedio subió un 31% en el primer mes. Esto es lo que estaba buscando."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#D97706"></div>
+              <div><strong>Diego F.</strong><span>Deportes · Mendoza</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"El soporte es excelente, respondieron en minutos. Pero lo mejor es que los widgets funcionan solos, sin que yo tenga que hacer nada."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#DC2626"></div>
+              <div><strong>Camila T.</strong><span>Hogar · CABA</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Desde que instalé CartBoost mi conversión subió un 22%. El Bundle Builder es una locura, mis clientes arman sus propios packs y gastan el doble."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#2563EB"></div>
+              <div><strong>Valentina R.</strong><span>Indumentaria · Buenos Aires</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"El Countdown Timer para el Black Friday fue increíble. Generé más ventas en 48 hs que en todo el mes anterior. Totalmente recomendado."</p>
+            <div class="t-author">
+              <div class="t-avatar" style="background:#7C3AED"></div>
+              <div><strong>Martín G.</strong><span>Electrónica · Córdoba</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="precios">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <span class="section-eyebrow">Planes simples</span>
+        <h2 class="section-title">Invertí en crecimiento</h2>
+        <p class="section-subtitle">7 días gratis en todos los planes. Sin tarjeta de crédito.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal fade-up" data-delay="0">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price"><span class="price-currency">$</span>12<span class="price-period">/mes</span></div>
+          <p class="plan-desc">Para tiendas que están arrancando y quieren su primera capa de CRO.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 3 widgets activos</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Countdown Timer</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Alertas de stock</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por email</li>
+          </ul>
+          <a href="#" class="btn btn-ghost plan-btn try-btn">Empezar gratis</a>
+        </div>
+        <div class="pricing-card pro reveal fade-up" data-delay="100">
+          <div class="plan-badge">MÁS POPULAR</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price"><span class="price-currency">$</span>29<span class="price-period">/mes</span></div>
+          <p class="plan-desc">Para tiendas que quieren maximizar conversiones con todas las herramientas.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todos los widgets</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bundle Builder</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Reviews + Slider de videos</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Analytics avanzado</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte prioritario 24/7</li>
+          </ul>
+          <a href="#" class="btn btn-primary plan-btn btn-shine try-btn">Empezar gratis →</a>
+        </div>
+        <div class="pricing-card reveal fade-up" data-delay="200">
+          <div class="plan-name">Scale</div>
+          <div class="plan-price"><span class="price-currency">$</span>69<span class="price-period">/mes</span></div>
+          <p class="plan-desc">Para tiendas de alto volumen que quieren escalar sin límites.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Pro</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Multi-tienda</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> A/B Testing</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Manager dedicado</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#2563EB"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Integraciones custom</li>
+          </ul>
+          <a href="#" class="btn btn-ghost plan-btn try-btn">Empezar gratis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="soporte">
+    <div class="container">
+      <div class="section-header reveal fade-up">
+        <span class="section-eyebrow">FAQ</span>
+        <h2 class="section-title">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq-list reveal fade-up">
+        <div class="faq-item">
+          <button class="faq-question">¿CartBoost funciona con todas las tiendas Tiendanube? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Sí, CartBoost es compatible con todos los planes de Tiendanube, desde el plan básico hasta los planes más avanzados. La instalación es directa desde el App Store oficial.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Necesito saber programar para instalarlo? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Para nada. CartBoost está diseñado para que cualquier dueño de tienda pueda instalarlo y configurarlo en menos de 10 minutos, sin tocar una línea de código.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Puedo probar CartBoost gratis? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Sí. Todos los planes incluyen 7 días de prueba gratis sin necesidad de ingresar tarjeta de crédito. Podés cancelar cuando quieras.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Los widgets afectan la velocidad de mi tienda? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>No. CartBoost está optimizado para carga asíncrona y no impacta el rendimiento de tu tienda. De hecho, al aumentar conversiones, el ROI es siempre positivo.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Puedo personalizar el diseño de los widgets? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Sí, podés editar colores, textos, tipografía y estilos para que cada widget se adapte perfectamente a la identidad visual de tu tienda y tu marca.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Qué pasa si quiero cancelar? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Podés cancelar tu suscripción en cualquier momento desde el panel de Tiendanube. No hay penalidades ni contratos mínimos. Tu satisfacción es nuestra prioridad.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <div class="cta-inner reveal fade-up">
+        <div class="cta-checks-row">
+          <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#2563EB"/><path d="M5 9l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 7 días de prueba gratis</span>
+          <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#2563EB"/><path d="M5 9l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Sin tarjeta de crédito</span>
+          <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#2563EB"/><path d="M5 9l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Asistencia 24/7</span>
+        </div>
+        <h2 class="cta-title">¿Listo para vender más?</h2>
+        <p class="cta-subtitle">Sumate a las +3200 tiendas que ya están convirtiendo más con CartBoost.</p>
+        <a href="#" class="btn btn-primary btn-xl btn-shine cta-btn try-btn">Comenzar Gratis →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">CartBoost</span>
+        </a>
+        <p class="footer-tagline">Convertí visitas en ventas reales.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter/X">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M12 10v7M12 13a3 3 0 016 0v4"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <span class="footer-col-title">Producto</span>
+          <a href="#caracteristicas">Características</a>
+          <a href="#widgets">Widgets</a>
+          <a href="#precios">Precios</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Soporte</span>
+          <a href="#soporte">Centro de ayuda</a>
+          <a href="#">Documentación</a>
+          <a href="#">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Legal</span>
+          <a href="#">Términos y condiciones</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CartBoost. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+
+  <!-- ===================== MODAL SISTEMA AUTH ===================== -->
+
+  <!-- PASO 1: Modal de autenticación -->
+  <div class="cb-overlay" id="cbOverlay" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="cb-modal" id="cbAuthModal">
+      <button class="cb-modal-close" id="cbModalClose" aria-label="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="cb-modal-brand">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CartBoost</span>
+      </div>
+      <h2 class="cb-modal-title" id="authModalTitle">Comenzá gratis con CartBoost</h2>
+      <p class="cb-modal-sub">Creá tu cuenta para conectar tu tienda Tiendanube</p>
+
+      <!-- Auth tabs -->
+      <div class="cb-tabs">
+        <button class="cb-tab active" data-tab="register">Registrarme</button>
+        <button class="cb-tab" data-tab="login">Iniciar sesión</button>
+      </div>
+
+      <!-- Google button -->
+      <button class="cb-google-btn" id="cbGoogleBtn">
+        <svg width="20" height="20" viewBox="0 0 48 48">
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        </svg>
+        <span id="cbGoogleBtnText">Registrarme con Google</span>
+      </button>
+
+      <div class="cb-divider"><span>o continuá con email</span></div>
+
+      <!-- Register form -->
+      <div class="cb-form-panel" id="cbRegisterPanel">
+        <div class="cb-field">
+          <label class="cb-label">Tu dirección de email</label>
+          <input type="email" class="cb-input" id="cbRegEmail" placeholder="tu@email.com" autocomplete="email" />
+        </div>
+        <div class="cb-field">
+          <label class="cb-label">Contraseña</label>
+          <div class="cb-input-wrap">
+            <input type="password" class="cb-input" id="cbRegPass" placeholder="Mínimo 8 caracteres" autocomplete="new-password" />
+            <button class="cb-eye" data-target="cbRegPass" aria-label="Ver contraseña">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="cb-field">
+          <label class="cb-label">Repetí tu contraseña</label>
+          <div class="cb-input-wrap">
+            <input type="password" class="cb-input" id="cbRegPass2" placeholder="Repetí tu contraseña" autocomplete="new-password" />
+            <button class="cb-eye" data-target="cbRegPass2" aria-label="Ver contraseña">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="cb-error" id="cbRegError"></div>
+        <button class="cb-submit-btn btn-shine" id="cbRegSubmit">
+          <span>Registrate</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="cb-legal">Al registrarte aceptás nuestros <a href="#">términos y condiciones</a> y <a href="#">políticas de privacidad</a>.</p>
+      </div>
+
+      <!-- Login form -->
+      <div class="cb-form-panel hidden" id="cbLoginPanel">
+        <div class="cb-field">
+          <label class="cb-label">Dirección de email</label>
+          <input type="email" class="cb-input" id="cbLogEmail" placeholder="tu@email.com" autocomplete="email" />
+        </div>
+        <div class="cb-field">
+          <label class="cb-label" style="display:flex;justify-content:space-between;">
+            <span>Contraseña</span>
+            <a href="#" class="cb-forgot">¿Olvidaste tu contraseña?</a>
+          </label>
+          <div class="cb-input-wrap">
+            <input type="password" class="cb-input" id="cbLogPass" placeholder="Tu contraseña" autocomplete="current-password" />
+            <button class="cb-eye" data-target="cbLogPass" aria-label="Ver contraseña">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="cb-remember">
+          <label class="cb-checkbox-label">
+            <input type="checkbox" id="cbRemember" />
+            <span class="cb-checkmark"></span>
+            Mantenerme conectado
+          </label>
+        </div>
+        <div class="cb-error" id="cbLogError"></div>
+        <button class="cb-submit-btn btn-shine" id="cbLogSubmit">
+          <span>Iniciar sesión</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PASO 2: Pantalla Connect Store (fullscreen) -->
+  <div class="cb-screen hidden" id="cbConnectScreen">
+    <div class="cb-screen-inner">
+      <div class="cb-screen-brand">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CartBoost</span>
+      </div>
+      <div class="cb-connect-card">
+        <div class="cb-connect-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect width="48" height="48" rx="16" fill="rgba(37,99,235,0.15)"/>
+            <path d="M16 24c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M28 28l4 4M20 20l-4-4" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="24" cy="24" r="3" fill="#2563EB"/>
+          </svg>
+        </div>
+        <h2 class="cb-connect-title">Conectá tu tienda</h2>
+        <p class="cb-connect-sub">Vinculá CartBoost con tu tienda Tiendanube para comenzar a crear widgets.</p>
+        <div class="cb-connect-steps">
+          <div class="cb-connect-step">
+            <span class="cb-step-num">1</span>
+            <span>Vas a ser redirigido a Tiendanube</span>
+          </div>
+          <div class="cb-connect-step">
+            <span class="cb-step-num">2</span>
+            <span>Autorizás la conexión con CartBoost</span>
+          </div>
+          <div class="cb-connect-step">
+            <span class="cb-step-num">3</span>
+            <span>Volvés y empezás a crear widgets</span>
+          </div>
+        </div>
+        <button class="cb-tn-btn btn-shine" id="cbConnectTNBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="white"/></svg>
+          Conectar Tiendanube
+        </button>
+        <p class="cb-connect-note">Conexión segura · Sin acceso a datos de pago</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PASO 5: Pantalla de Éxito -->
+  <div class="cb-screen hidden" id="cbSuccessScreen">
+    <div class="cb-screen-inner">
+      <div class="cb-screen-brand">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CartBoost</span>
+      </div>
+      <div class="cb-success-card">
+        <div class="cb-success-icon">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="32" fill="rgba(16,185,129,0.15)"/>
+            <circle cx="32" cy="32" r="28" fill="rgba(16,185,129,0.1)" class="cb-success-ring"/>
+            <path d="M20 32l9 9 15-15" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="cb-check-path"/>
+          </svg>
+        </div>
+        <h2 class="cb-success-title">¡Tienda conectada con éxito!</h2>
+        <p class="cb-success-sub">Tu tienda fue vinculada correctamente a CartBoost. Ahora podés empezar a crear widgets y aumentar tus ventas.</p>
+        <div class="cb-success-info" id="cbSuccessInfo">
+          <div class="cb-info-row">
+            <span class="cb-info-label">Tienda</span>
+            <span class="cb-info-val" id="cbStoreName">—</span>
+          </div>
+          <div class="cb-info-row">
+            <span class="cb-info-label">Estado</span>
+            <span class="cb-info-val connected"><span class="pulse-dot" style="background:#10B981"></span> Conectada</span>
+          </div>
+        </div>
+        <button class="cb-submit-btn btn-shine" id="cbGoToDashboard">
+          Ir al Dashboard →
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PASO 6: Dashboard -->
+  <div class="cb-screen hidden" id="cbDashboard">
+    <div class="cb-dash-header">
+      <div class="cb-dash-brand">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CartBoost</span>
+      </div>
+      <div class="cb-dash-user" id="cbDashUser">
+        <div class="cb-dash-avatar" id="cbDashAvatar">U</div>
+        <span id="cbDashUserName">Usuario</span>
+      </div>
+    </div>
+    <div class="cb-dash-body">
+      <div class="cb-dash-welcome">
+        <h1 class="cb-dash-title">¡Bienvenido a CartBoost! 🚀</h1>
+        <p class="cb-dash-sub">Tu tienda está conectada y lista para convertir más.</p>
+      </div>
+      <div class="cb-dash-grid">
+        <div class="cb-dash-card" data-tour-target="store-card">
+          <div class="cb-dash-card-icon">🏪</div>
+          <span class="cb-dash-card-label">Tienda conectada</span>
+          <span class="cb-dash-card-val" id="cbDashStoreName">—</span>
+        </div>
+        <div class="cb-dash-card" data-tour-target="products">
+          <div class="cb-dash-card-icon">📦</div>
+          <span class="cb-dash-card-label">Productos</span>
+          <span class="cb-dash-card-val" id="cbDashProducts">—</span>
+          <button class="cb-dash-sync-btn" id="cbSyncProductsBtn" data-tour-target="sync-products">
+            <svg class="cb-sync-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6M3 22v-6h6M3.51 9a9 9 0 0114.85-3.36L21 8M3 16l2.64 2.36A9 9 0 0020.49 15"/></svg>
+            <span>Sincronizar productos</span>
+          </button>
+        </div>
+        <div class="cb-dash-card" data-tour-target="widgets-count">
+          <div class="cb-dash-card-icon">⚡</div>
+          <span class="cb-dash-card-label">Widgets activos</span>
+          <span class="cb-dash-card-val" id="cbDashWidgets">0</span>
+        </div>
+        <div class="cb-dash-card">
+          <div class="cb-dash-card-icon">🔗</div>
+          <span class="cb-dash-card-label">Estado</span>
+          <span class="cb-dash-card-val connected"><span class="pulse-dot" style="background:#10B981"></span> Activa</span>
+        </div>
+      </div>
+      <div class="cb-dash-widgets-section" data-tour-target="widgets-section">
+        <h3 class="cb-dash-section-title">Activá tus primeros widgets</h3>
+        <div class="cb-dash-widgets-grid">
+          <div class="cb-dash-widget-card" data-widget="countdown" data-tour-target="first-widget-card">
+            <span class="cb-dash-widget-icon">🔥</span>
+            <span class="cb-dash-widget-name">Countdown Timer</span>
+            <button class="cb-dash-activate">Activar</button>
+          </div>
+          <div class="cb-dash-widget-card" data-widget="bundle">
+            <span class="cb-dash-widget-icon">🛒</span>
+            <span class="cb-dash-widget-name">Bundle Builder</span>
+            <button class="cb-dash-activate">Activar</button>
+          </div>
+          <div class="cb-dash-widget-card" data-widget="reviews">
+            <span class="cb-dash-widget-icon">⭐</span>
+            <span class="cb-dash-widget-name">Reviews</span>
+            <button class="cb-dash-activate">Activar</button>
+          </div>
+          <div class="cb-dash-widget-card" data-widget="shipping">
+            <span class="cb-dash-widget-icon">🚚</span>
+            <span class="cb-dash-widget-name">Envío Gratis</span>
+            <button class="cb-dash-activate">Activar</button>
+          </div>
+          <div class="cb-dash-widget-card" data-widget="stock">
+            <span class="cb-dash-widget-icon">💬</span>
+            <span class="cb-dash-widget-name">Alertas de Stock</span>
+            <button class="cb-dash-activate">Activar</button>
+          </div>
+          <div class="cb-dash-widget-card" data-widget="video">
+            <span class="cb-dash-widget-icon">🎥</span>
+            <span class="cb-dash-widget-name">Slider de Videos</span>
+            <button class="cb-dash-activate">Activar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TOUR / TUTORIAL ONBOARDING ===================== -->
+  <!-- Overlay oscuro de fondo + spotlight + tooltip, igual al patrón de Wigy:
+       cada paso resalta un elemento real del dashboard con un recuadro y una
+       burbuja con texto apuntando hacia él. -->
+  <div class="cb-tour-overlay hidden" id="cbTourOverlay"></div>
+  <div class="cb-tour-spotlight hidden" id="cbTourSpotlight"></div>
+  <div class="cb-tour-tooltip hidden" id="cbTourTooltip">
+    <div class="cb-tour-tooltip-header">
+      <h4 class="cb-tour-title" id="cbTourTitle">Título del paso</h4>
+    </div>
+    <p class="cb-tour-desc" id="cbTourDesc">Descripción del paso.</p>
+    <div class="cb-tour-footer">
+      <span class="cb-tour-progress" id="cbTourProgress">1/8</span>
+      <div class="cb-tour-actions">
+        <button class="cb-tour-back" id="cbTourBack">Atrás</button>
+        <button class="cb-tour-next btn-shine" id="cbTourNext">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de bienvenida al tutorial (paso 0, centrado, igual a "¡Bienvenido a Wigy!") -->
+  <div class="cb-tour-welcome hidden" id="cbTourWelcome">
+    <div class="cb-tour-welcome-card">
+      <h2 class="cb-tour-welcome-title" id="cbTourWelcomeTitle">¡Bienvenido a CartBoost!</h2>
+      <p class="cb-tour-welcome-sub" id="cbTourWelcomeSub">
+        Vamos a hacer un recorrido rápido por tu nuevo panel de control para que puedas empezar a crear widgets y potenciar tu tienda en minutos.
+      </p>
+      <div class="cb-tour-welcome-actions">
+        <button class="cb-tour-skip" id="cbTourSkip">No gracias</button>
+        <button class="cb-submit-btn btn-shine" id="cbTourStart">Empezar tutorial →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
