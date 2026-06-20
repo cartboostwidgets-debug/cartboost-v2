@@ -1042,31 +1042,42 @@
   if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
   if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
 
-  // Navegación del sidebar: marca el link activo. Las secciones de
-  // Widgets/Productos/Configuración/Facturación todavía no existen como
-  // pantallas propias — eso queda fuera de este cambio (solo se pidió
-  // rediseñar el Dashboard). Por ahora, navegar cierra el sidebar y avisa
-  // si la sección todavía no está implementada.
+  // Navegación del sidebar: cambia la vista visible dentro del Dashboard
+  // (Dashboard / Widgets / Productos / Configuración / Facturación / Ayuda).
+  function switchDashView(viewName) {
+    $$('.cb-view').forEach(v => {
+      const isTarget = v.dataset.view === viewName;
+      v.classList.toggle('active', isTarget);
+      v.classList.toggle('hidden', !isTarget);
+    });
+    $$('.cb-sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.nav === viewName));
+
+    // Al entrar a cada vista, refrescamos su contenido con el estado actual.
+    if (viewName === 'widgets') renderWidgetsView();
+    if (viewName === 'products') renderProductsView();
+    if (viewName === 'settings') renderSettingsView();
+
+    // Llevar el scroll al tope al cambiar de sección.
+    const dashBody = $('.cb-dash-body');
+    if (dashBody) dashBody.scrollTop = 0;
+  }
+  window.cbSwitchDashView = switchDashView;
+
   $$('.cb-sidebar-link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      $$('.cb-sidebar-link').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
       closeSidebar();
-
-      const section = link.dataset.nav;
-      if (section && section !== 'dashboard') {
-        showToast(`La sección "${link.textContent.trim()}" todavía no está implementada.`, 'info');
-      }
+      switchDashView(link.dataset.nav || 'dashboard');
     });
   });
 
-  // Botón de configuración junto a la tienda conectada (sidebar).
-  // Sin pantalla de configuración propia todavía — feedback honesto.
+  // Botón de configuración junto a la tienda conectada (sidebar) ahora
+  // navega de verdad a la vista de Configuración, en vez de solo avisar.
   const sidebarStoreGear = $('#cbSidebarStoreGear');
   if (sidebarStoreGear) {
     sidebarStoreGear.addEventListener('click', () => {
-      showToast('La configuración de la tienda todavía no está implementada.', 'info');
+      closeSidebar();
+      switchDashView('settings');
     });
   }
 
@@ -1136,30 +1147,13 @@
   });
 
   /* =====================================================
-     WIDGETS RECIENTES — botones "Ver" / "Crear widget"
-     =====================================================
-     Estos botones no tienen todavía una pantalla de listado de widgets
-     ni un modal de creación real conectados a backend. Se les da feedback
-     honesto en vez de simular una acción que no existe.
+     WIDGETS RECIENTES — botón "Ver" navega a la vista Widgets real.
+     El botón "Crear widget" se conecta más abajo al modal real
+     (ver bloque "MODAL: CREAR WIDGET").
      ===================================================== */
   ['#cbViewWidgetsBtn', '#cbEmptyViewWidgetsBtn'].forEach(sel => {
     const btn = $(sel);
-    if (btn) btn.addEventListener('click', () => {
-      showToast('El listado completo de widgets todavía no está implementado.', 'info');
-    });
-  });
-
-  ['#cbCreateWidgetBtn', '#cbEmptyCreateWidgetBtn'].forEach(sel => {
-    const btn = $(sel);
-    if (btn) btn.addEventListener('click', () => {
-      // Si existe al menos un widget en la grilla de tipos, llevamos foco ahí
-      // como siguiente paso lógico (igual que hace Wigy: te manda a elegir tipo).
-      const widgetsSection = $('.cb-dash-widgets-section');
-      if (widgetsSection) {
-        widgetsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        showToast('Elegí un tipo de widget para activarlo.', 'info');
-      }
-    });
+    if (btn) btn.addEventListener('click', () => switchDashView('widgets'));
   });
 
   /* =====================================================
@@ -1169,17 +1163,12 @@
      ===================================================== */
   const quickViewProducts = $('#cbQuickViewProducts');
   if (quickViewProducts) {
-    quickViewProducts.addEventListener('click', () => {
-      showToast('La vista de Productos todavía no está implementada.', 'info');
-    });
+    quickViewProducts.addEventListener('click', () => switchDashView('products'));
   }
 
   const quickViewWidgets = $('#cbQuickViewWidgets');
   if (quickViewWidgets) {
-    quickViewWidgets.addEventListener('click', () => {
-      const widgetsSection = $('.cb-dash-widgets-section');
-      if (widgetsSection) widgetsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    quickViewWidgets.addEventListener('click', () => switchDashView('widgets'));
   }
 
   // Activar/desactivar widgets desde el dashboard (UI local;
@@ -1207,7 +1196,156 @@
         !isActive ? 'Widget activado correctamente.' : 'Widget desactivado.',
         !isActive ? 'success' : 'info'
       );
+
+      // Si la vista "Widgets" está abierta, reflejar el cambio ahí también.
+      const widgetsView = document.querySelector('.cb-view[data-view="widgets"]');
+      if (widgetsView && widgetsView.classList.contains('active')) renderWidgetsView();
     });
+  });
+
+  /* =====================================================
+     VISTA: WIDGETS — listado real basado en los widgets
+     activados en la grilla "Tipos de widgets" del Dashboard.
+     No hay un estado separado: esta vista LEE directamente
+     los mismos botones .cb-dash-activate como única fuente
+     de verdad, para no duplicar el estado en dos lugares.
+     ===================================================== */
+  function renderWidgetsView() {
+    const listEl = $('#cbWidgetsListView');
+    const emptyEl = $('#cbWidgetsListEmpty');
+    if (!listEl || !emptyEl) return;
+
+    const activeCards = $$('.cb-dash-widget-card').filter(card => {
+      const btn = card.querySelector('.cb-dash-activate');
+      return btn && btn.classList.contains('active');
+    });
+
+    if (activeCards.length === 0) {
+      listEl.innerHTML = '';
+      emptyEl.classList.remove('hidden');
+      return;
+    }
+
+    emptyEl.classList.add('hidden');
+    listEl.innerHTML = activeCards.map(card => {
+      const icon = card.querySelector('.cb-dash-widget-icon')?.textContent || '⚡';
+      const name = card.querySelector('.cb-dash-widget-name')?.textContent || 'Widget';
+      return `
+        <div class="cb-widget-list-row">
+          <span class="cb-widget-list-icon">${icon}</span>
+          <span class="cb-widget-list-name">${name}</span>
+          <span class="cb-widget-list-status">
+            <span class="pulse-dot" style="background:#10B981"></span> Activo
+          </span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const widgetsViewCreateBtn = $('#cbWidgetsViewCreateBtn');
+  if (widgetsViewCreateBtn) {
+    widgetsViewCreateBtn.addEventListener('click', () => openWidgetModal());
+  }
+
+  /* =====================================================
+     VISTA: PRODUCTOS — conteo real desde cbState.store
+     (mismo dato que alimenta la card del Dashboard). La
+     tabla detallada queda vacía con un mensaje honesto
+     porque no existe un endpoint de listado de productos
+     individuales todavía (solo el conteo total vía OAuth).
+     ===================================================== */
+  function renderProductsView() {
+    const countEl = $('#cbProductsViewCount');
+    const count = cbState.store ? (cbState.store.productsCount || 0) : 0;
+    if (countEl) {
+      countEl.textContent = count > 0
+        ? `${count.toLocaleString('es-AR')} productos sincronizados`
+        : 'Sin productos sincronizados todavía';
+    }
+  }
+
+  const productsViewSyncBtn = $('#cbProductsViewSyncBtn');
+  if (productsViewSyncBtn) {
+    productsViewSyncBtn.addEventListener('click', () => runProductSync(productsViewSyncBtn));
+  }
+
+  /* =====================================================
+     VISTA: CONFIGURACIÓN — datos reales del usuario/tienda
+     ===================================================== */
+  function renderSettingsView() {
+    const storeNameEl = $('#cbSettingsStoreName');
+    const userNameEl = $('#cbSettingsUserName');
+    if (storeNameEl) storeNameEl.textContent = cbState.store ? cbState.store.name : '—';
+    if (userNameEl) userNameEl.textContent = cbState.user ? (cbState.user.name || cbState.user.email) : '—';
+  }
+
+  const disconnectStoreBtn = $('#cbDisconnectStoreBtn');
+  if (disconnectStoreBtn) {
+    disconnectStoreBtn.addEventListener('click', () => {
+      // TODO: conectar backend real — esto debería llamar a un endpoint
+      // que revoque el access_token guardado en el servidor, ej:
+      //   await fetch(`${API_BASE_URL}/store/${cbState.store?.id}/disconnect`, { method: 'POST' });
+      showToast('Desconectar la tienda todavía no está conectado a un backend real.', 'info');
+    });
+  }
+
+  /* =====================================================
+     MODAL: CREAR WIDGET
+     =====================================================
+     Permite elegir uno de los 6 tipos de widget disponibles.
+     Crearlo activa localmente el mismo botón .cb-dash-activate
+     de la grilla "Tipos de widgets" — no duplica lógica de
+     activación, reutiliza la que ya existe.
+     ===================================================== */
+  const widgetModalOverlay = $('#cbWidgetModalOverlay');
+  const widgetModalClose = $('#cbWidgetModalClose');
+
+  function openWidgetModal() {
+    if (!widgetModalOverlay) return;
+    widgetModalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeWidgetModal() {
+    if (!widgetModalOverlay) return;
+    widgetModalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (widgetModalClose) widgetModalClose.addEventListener('click', closeWidgetModal);
+  if (widgetModalOverlay) {
+    widgetModalOverlay.addEventListener('click', (e) => {
+      if (e.target === widgetModalOverlay) closeWidgetModal();
+    });
+  }
+
+  $$('.cb-widget-modal-option').forEach(option => {
+    option.addEventListener('click', () => {
+      const widgetKey = option.dataset.widget;
+      const widgetName = option.dataset.name;
+
+      // Buscar la card correspondiente en la grilla "Tipos de widgets"
+      // y activarla mediante el mismo botón .cb-dash-activate ya existente,
+      // para no crear un segundo estado de activación en paralelo.
+      const targetCard = document.querySelector(`.cb-dash-widget-card[data-widget="${widgetKey}"]`);
+      const targetBtn = targetCard ? targetCard.querySelector('.cb-dash-activate') : null;
+
+      if (targetBtn && !targetBtn.classList.contains('active')) {
+        targetBtn.click(); // reutiliza el handler real de activación/contador
+      } else if (targetBtn) {
+        showToast(`"${widgetName}" ya estaba activado.`, 'info');
+      }
+
+      closeWidgetModal();
+      renderWidgetsView();
+    });
+  });
+
+  // Conectar los botones "Crear widget" existentes (panel de Widgets
+  // recientes, estado vacío, y header del panel) al modal real.
+  ['#cbCreateWidgetBtn', '#cbEmptyCreateWidgetBtn'].forEach(sel => {
+    const btn = $(sel);
+    if (btn) btn.addEventListener('click', () => openWidgetModal());
   });
 
   /* =====================================================
