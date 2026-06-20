@@ -329,7 +329,8 @@
 
   // URL a la que Tiendanube redirige luego de que el usuario autoriza la app.
   // Debe coincidir EXACTAMENTE con la configurada en el panel de partners de Tiendanube.
-  const TIENDANUBE_REDIRECT_URI = 'https://uf463x4u78r1.share.zrok.io/oauth/callback';
+  const TIENDANUBE_REDIRECT_URI =
+'https://cartboost-v2.onrender.com/oauth/callback';
 
   // Scopes que la app solicita. Ajustar según los permisos que CartBoost necesite.
   // Referencia: https://tiendanube.github.io/api-documentation/authentication
