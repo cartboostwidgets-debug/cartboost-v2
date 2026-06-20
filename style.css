@@ -1976,9 +1976,38 @@ ul { list-style: none; }
 /* ---- Layout: sidebar + contenido lado a lado en desktop ---- */
 .cb-dash-main {
   display: flex;
+  position: relative;
 }
 #cbDashboard { display: flex; flex-direction: column; }
-#cbDashboard .cb-dash-main { flex: 1; }
+#cbDashboard .cb-dash-main { flex: 1; min-height: 0; }
+
+/* ---- Sidebar responsive: drawer fijo en mobile/tablet ----
+   En desktop (≥1025px) el sidebar vive en el flujo normal, sticky,
+   al lado del contenido (regla .cb-sidebar de más arriba, sin tocar).
+   Por debajo de ese ancho se convierte en un drawer que entra/sale
+   de pantalla con transform, para no superponerse ni empujar el
+   contenido principal. */
+@media (max-width: 1024px) {
+  .cb-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    max-width: 85vw;
+    z-index: 300;
+    transform: translateX(-100%);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow: 8px 0 32px rgba(0,0,0,.4);
+  }
+  .cb-sidebar.open { transform: translateX(0); }
+
+  .cb-sidebar-top { display: flex; }
+
+  .cb-sidebar-overlay {
+    display: none;
+  }
+  .cb-sidebar-overlay:not(.hidden) { display: block; }
+}
 
 .cb-dash-body {
   max-width: 1100px;
@@ -1997,7 +2026,7 @@ ul { list-style: none; }
 
 .cb-dash-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 48px;
 }
@@ -2126,7 +2155,7 @@ ul { list-style: none; }
 /* Responsive: auth/onboarding/dashboard */
 @media (max-width: 768px) {
   .cb-modal { padding: 30px 22px 22px; max-width: 100%; }
-  .cb-dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .cb-dash-grid { grid-template-columns: 1fr; }
   .cb-dash-widgets-grid { grid-template-columns: 1fr; }
   .cb-dash-header { padding: 16px 20px; }
   .cb-dash-body { padding: 36px 20px 60px; }
@@ -2467,3 +2496,4 @@ ul { list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
