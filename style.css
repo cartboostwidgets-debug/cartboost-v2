@@ -2017,14 +2017,14 @@ ul { list-style: none; }
   padding: 48px 32px 80px;
 }
 
-.cb-dash-welcome { margin-bottom: 36px; }
+.cb-dash-welcome { margin-bottom: 28px; }
 .cb-dash-title {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 800;
-  letter-spacing: -.02em;
-  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 6px;
 }
-.cb-dash-sub { font-size: .95rem; color: var(--text-muted); }
+.cb-dash-sub { font-size: .88rem; color: var(--text-muted); }
 
 .cb-dash-grid {
   display: grid;
@@ -2034,10 +2034,13 @@ ul { list-style: none; }
 }
 
 .cb-dash-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   background: #0B1226;
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 22px;
+  border-radius: var(--radius);
+  padding: 16px 18px;
   transition: var(--transition);
 }
 .cb-dash-card:hover {
@@ -2046,7 +2049,20 @@ ul { list-style: none; }
   transform: translateY(-3px);
 }
 
-.cb-dash-card-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.cb-dash-card-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(37,99,235,.12);
+}
+.cb-dash-card-icon-box.widgets { background: rgba(16,185,129,.12); }
+
+.cb-dash-card-body { display: flex; flex-direction: column; min-width: 0; }
+.cb-dash-card-icon { font-size: 1.2rem; margin-bottom: 0; }
 .cb-dash-card-label { display: block; font-size: .78rem; color: var(--text-dim); margin-bottom: 6px; }
 .cb-dash-card-val { font-size: 1.15rem; font-weight: 800; letter-spacing: -.01em; }
 .cb-dash-card-val.connected { display: flex; align-items: center; gap: 7px; color: #34D399; font-size: 1rem; }
