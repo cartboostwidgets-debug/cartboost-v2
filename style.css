@@ -2028,7 +2028,7 @@ ul { list-style: none; }
 
 .cb-dash-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-bottom: 48px;
 }
@@ -2090,6 +2090,16 @@ ul { list-style: none; }
   font-weight: 700;
   margin-bottom: 20px;
 }
+
+/* Estado vacío simple, una sola línea, igual al "No hay widgets" de Wigy
+   (distinto del estado vacío grande con ícono de "Widgets recientes"). */
+.cb-dash-empty-inline {
+  font-size: .88rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 24px 0;
+}
+.cb-dash-empty-inline.hidden { display: none; }
 
 .cb-dash-widgets-grid {
   display: grid;
