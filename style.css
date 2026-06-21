@@ -1894,6 +1894,8 @@ ul { list-style: none; }
 }
 .cb-sidebar-link svg { flex-shrink: 0; opacity: .85; }
 .cb-sidebar-link:hover { background: var(--card); color: var(--text); }
+.cb-sidebar-link-danger { color: #FCA5A5; margin-top: 8px; border-top: 1px solid var(--border); padding-top: 15px; }
+.cb-sidebar-link-danger:hover { background: rgba(239,68,68,.1); color: #FCA5A5; }
 .cb-sidebar-link.active {
   background: rgba(37,99,235,.14);
   color: var(--blue-light);
@@ -2032,13 +2034,17 @@ ul { list-style: none; }
 }
 
 .cb-dash-card {
-  background: var(--card);
+  background: #0B1226;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px 22px;
   transition: var(--transition);
 }
-.cb-dash-card:hover { border-color: rgba(37,99,235,.3); transform: translateY(-3px); }
+.cb-dash-card:hover {
+  border-color: rgba(37,99,235,.35);
+  box-shadow: 0 0 28px rgba(37,99,235,.35);
+  transform: translateY(-3px);
+}
 
 .cb-dash-card-icon { font-size: 1.6rem; margin-bottom: 14px; }
 .cb-dash-card-label { display: block; font-size: .78rem; color: var(--text-dim); margin-bottom: 6px; }
@@ -2355,6 +2361,27 @@ ul { list-style: none; }
 .cb-view { display: none; }
 .cb-view.active { display: block; animation: cbViewFadeIn .3s ease; }
 @keyframes cbViewFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Banner persistente "Tienda conectada con éxito" dentro del Dashboard */
+.cb-dash-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+  background: rgba(16,185,129,.08);
+  border: 1px solid rgba(16,185,129,.28);
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(16,185,129,.12);
+  animation: cbBannerIn .4s cubic-bezier(.16,1,.3,1);
+}
+.cb-dash-success-banner.hidden { display: none; }
+@keyframes cbBannerIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.cb-banner-icon { flex-shrink: 0; display: flex; animation: cbBannerPulse 2.5s ease-in-out infinite; }
+@keyframes cbBannerPulse { 0%,100% { filter: drop-shadow(0 0 0 rgba(16,185,129,0)); } 50% { filter: drop-shadow(0 0 6px rgba(16,185,129,.6)); } }
+.cb-banner-text { flex: 1; font-size: .88rem; font-weight: 600; color: #D1FAE5; }
+.cb-banner-close { flex-shrink: 0; color: rgba(209,250,229,.6); padding: 4px; border-radius: 6px; transition: var(--transition); }
+.cb-banner-close:hover { color: #D1FAE5; background: rgba(16,185,129,.12); }
 
 /* Footer de ayuda (no existía estilo todavía) */
 .cb-dash-help-footer { margin-top: 8px; }
