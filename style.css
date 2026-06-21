@@ -2112,10 +2112,54 @@ ul { list-style: none; }
 .cb-dash-empty-inline {
   font-size: .88rem;
   color: var(--text-dim);
-  text-align: center;
-  padding: 24px 0;
+  margin: 0;
 }
 .cb-dash-empty-inline.hidden { display: none; }
+
+/* Fila del estado vacío: texto + acceso al catálogo, siempre visible
+   como única vía de entrada cuando el usuario no activó nada todavía. */
+.cb-dash-empty-inline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  flex-wrap: wrap;
+}
+.cb-dash-empty-inline-row.hidden { display: none; }
+
+/* Resumen con contador, visible solo cuando hay al menos un widget activo.
+   Reemplaza mostrar el catálogo completo de 8 cards dentro del Dashboard
+   (ese catálogo vive aparte, en la vista "Widgets" del sidebar). */
+.cb-dash-widget-types-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0;
+  flex-wrap: wrap;
+}
+.cb-dash-widget-types-summary.hidden { display: none; }
+.cb-dash-widget-types-count {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--blue-light);
+  letter-spacing: -.02em;
+}
+.cb-dash-widget-types-label { font-size: .85rem; color: var(--text-muted); flex: 1; }
+
+.cb-btn-ghost-sm {
+  flex-shrink: 0;
+  padding: 7px 16px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-muted);
+  font-size: .8rem;
+  font-weight: 600;
+  font-family: var(--font);
+  transition: var(--transition);
+}
+.cb-btn-ghost-sm:hover { border-color: rgba(37,99,235,.4); color: var(--text); background: var(--card-hover); }
 
 .cb-dash-widgets-grid {
   display: grid;
