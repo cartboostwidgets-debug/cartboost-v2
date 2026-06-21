@@ -969,6 +969,8 @@
       // antes de posicionar el primer tooltip sobre sus elementos reales.
       setTimeout(() => startCartBoostTutorial(data), 500);
     }
+
+    updateWidgetTypesVisibility();
   }
 
   // Sincronización manual de productos (botón dentro de la card "Productos").
@@ -1193,6 +1195,20 @@
     quickViewWidgets.addEventListener('click', () => switchDashView('widgets'));
   }
 
+  // Tipos de widgets: igual a Wigy, el catálogo completo solo se muestra
+  // si el usuario ya tiene al menos un widget activo. Si no tiene ninguno,
+  // se ve el texto simple "No hay widgets" (crear el primero se hace desde
+  // el botón "+" de Widgets recientes, que abre el modal Crear Widget).
+  function updateWidgetTypesVisibility() {
+    const grid = $('#cbWidgetTypesGrid');
+    const empty = $('#cbWidgetTypesEmpty');
+    if (!grid || !empty) return;
+
+    const hasActive = $$('.cb-dash-activate').some(b => b.classList.contains('active'));
+    grid.classList.toggle('hidden', !hasActive);
+    empty.classList.toggle('hidden', hasActive);
+  }
+
   // Activar/desactivar widgets desde el dashboard (UI local;
   // conectar a tu API para persistir el estado real del widget).
   $$('.cb-dash-activate').forEach(btn => {
@@ -1218,6 +1234,8 @@
         !isActive ? 'Widget activado correctamente.' : 'Widget desactivado.',
         !isActive ? 'success' : 'info'
       );
+
+      updateWidgetTypesVisibility();
 
       // Si la vista "Widgets" está abierta, reflejar el cambio ahí también.
       const widgetsView = document.querySelector('.cb-view[data-view="widgets"]');
@@ -1494,6 +1512,16 @@
       return runTourStep(index + 1);
     }
 
+    // Los pasos que presentan "Tipos de widgets" necesitan que la grilla
+    // esté visible aunque el usuario todavía no tenga ningún widget activo
+    // (su propósito es justamente invitar a activar el primero).
+    if (step.target === 'widgets-section' || step.target === 'first-widget-card') {
+      const grid = $('#cbWidgetTypesGrid');
+      const empty = $('#cbWidgetTypesEmpty');
+      if (grid) grid.classList.remove('hidden');
+      if (empty) empty.classList.add('hidden');
+    }
+
     targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     // Pequeño delay para que el scroll termine antes de medir posiciones.
@@ -1567,6 +1595,9 @@
       tourTooltip.classList.add('hidden');
     }, 300);
     markTutorialDone();
+    // Restaurar el estado real de "Tipos de widgets": el tour pudo haber
+    // forzado la grilla visible aunque no hubiera widgets activos todavía.
+    updateWidgetTypesVisibility();
   }
 
   // Permitir cerrar el tour con Escape, marcándolo como visto.
