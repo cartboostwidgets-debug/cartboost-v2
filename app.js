@@ -1199,15 +1199,28 @@
   // si el usuario ya tiene al menos un widget activo. Si no tiene ninguno,
   // se ve el texto simple "No hay widgets" (crear el primero se hace desde
   // el botón "+" de Widgets recientes, que abre el modal Crear Widget).
+  // Resumen de "Tipos de widgets" en el Dashboard: muestra solo un contador
+  // liviano + botón "Ver catálogo" (nunca el listado completo de 8 cards,
+  // que vive aparte en la vista Widgets del sidebar — igual que en Wigy,
+  // donde el Dashboard nunca despliega el catálogo entero).
   function updateWidgetTypesVisibility() {
-    const grid = $('#cbWidgetTypesGrid');
-    const empty = $('#cbWidgetTypesEmpty');
-    if (!grid || !empty) return;
+    const emptyRow = $('#cbWidgetTypesEmptyRow');
+    const summary = $('#cbWidgetTypesSummary');
+    const activeCountEl = $('#cbWidgetTypesActiveCount');
+    if (!emptyRow || !summary) return;
 
-    const hasActive = $$('.cb-dash-activate').some(b => b.classList.contains('active'));
-    grid.classList.toggle('hidden', !hasActive);
-    empty.classList.toggle('hidden', hasActive);
+    const activeCount = $$('.cb-dash-activate').filter(b => b.classList.contains('active')).length;
+    const hasActive = activeCount > 0;
+
+    emptyRow.classList.toggle('hidden', hasActive);
+    summary.classList.toggle('hidden', !hasActive);
+    if (activeCountEl) activeCountEl.textContent = activeCount;
   }
+
+  ['#cbWidgetTypesCatalogBtn', '#cbWidgetTypesCatalogBtnEmpty'].forEach(sel => {
+    const btn = $(sel);
+    if (btn) btn.addEventListener('click', () => switchDashView('widgets'));
+  });
 
   // Activar/desactivar widgets desde el dashboard (UI local;
   // conectar a tu API para persistir el estado real del widget).
@@ -1282,9 +1295,20 @@
     }).join('');
   }
 
+  // "Crear widget" ahora navega a la vista Widgets (donde vive el catálogo
+  // real) en vez de abrir un modal aparte, para no tener dos lugares con
+  // el mismo catálogo y dos caminos de activación corriendo en paralelo.
+  function goToWidgetCatalog() {
+    switchDashView('widgets');
+    setTimeout(() => {
+      const catalog = document.querySelector('[data-view="widgets"] .cb-dash-widgets-grid');
+      if (catalog) catalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
   const widgetsViewCreateBtn = $('#cbWidgetsViewCreateBtn');
   if (widgetsViewCreateBtn) {
-    widgetsViewCreateBtn.addEventListener('click', () => openWidgetModal());
+    widgetsViewCreateBtn.addEventListener('click', goToWidgetCatalog);
   }
 
   /* =====================================================
@@ -1329,63 +1353,11 @@
     });
   }
 
-  /* =====================================================
-     MODAL: CREAR WIDGET
-     =====================================================
-     Permite elegir uno de los 6 tipos de widget disponibles.
-     Crearlo activa localmente el mismo botón .cb-dash-activate
-     de la grilla "Tipos de widgets" — no duplica lógica de
-     activación, reutiliza la que ya existe.
-     ===================================================== */
-  const widgetModalOverlay = $('#cbWidgetModalOverlay');
-  const widgetModalClose = $('#cbWidgetModalClose');
-
-  function openWidgetModal() {
-    if (!widgetModalOverlay) return;
-    widgetModalOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeWidgetModal() {
-    if (!widgetModalOverlay) return;
-    widgetModalOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  if (widgetModalClose) widgetModalClose.addEventListener('click', closeWidgetModal);
-  if (widgetModalOverlay) {
-    widgetModalOverlay.addEventListener('click', (e) => {
-      if (e.target === widgetModalOverlay) closeWidgetModal();
-    });
-  }
-
-  $$('.cb-widget-modal-option').forEach(option => {
-    option.addEventListener('click', () => {
-      const widgetKey = option.dataset.widget;
-      const widgetName = option.dataset.name;
-
-      // Buscar la card correspondiente en la grilla "Tipos de widgets"
-      // y activarla mediante el mismo botón .cb-dash-activate ya existente,
-      // para no crear un segundo estado de activación en paralelo.
-      const targetCard = document.querySelector(`.cb-dash-widget-card[data-widget="${widgetKey}"]`);
-      const targetBtn = targetCard ? targetCard.querySelector('.cb-dash-activate') : null;
-
-      if (targetBtn && !targetBtn.classList.contains('active')) {
-        targetBtn.click(); // reutiliza el handler real de activación/contador
-      } else if (targetBtn) {
-        showToast(`"${widgetName}" ya estaba activado.`, 'info');
-      }
-
-      closeWidgetModal();
-      renderWidgetsView();
-    });
-  });
-
   // Conectar los botones "Crear widget" existentes (panel de Widgets
-  // recientes, estado vacío, y header del panel) al modal real.
+  // recientes, estado vacío) para que naveguen al catálogo real.
   ['#cbCreateWidgetBtn', '#cbEmptyCreateWidgetBtn'].forEach(sel => {
     const btn = $(sel);
-    if (btn) btn.addEventListener('click', () => openWidgetModal());
+    if (btn) btn.addEventListener('click', goToWidgetCatalog);
   });
 
   /* =====================================================
@@ -1438,13 +1410,13 @@
       },
       {
         target: 'widgets-section',
-        title: 'Tus primeros widgets',
-        desc: 'Ahora vamos a crear tu primer widget. Acá abajo tenés todos los tipos disponibles: countdown, bundles, reviews y más.'
+        title: 'Tipos de widgets',
+        desc: 'Acá vas a ver cuántos widgets tenés activos. Cuando quieras crear el primero, tocá "Ver catálogo" para elegir entre countdown, bundles, reviews y más.'
       },
       {
         target: 'first-widget-card',
         title: 'Activá tu primer widget',
-        desc: 'Tocá "Activar" en cualquier widget para encenderlo en tu tienda. Podés activar y desactivar las veces que quieras.'
+        desc: 'Tocá "Ver catálogo" para abrir todos los tipos de widget disponibles y activar el que quieras.'
       },
       {
         target: 'sync-products',
@@ -1507,14 +1479,13 @@
       return runTourStep(index + 1);
     }
 
-    // Los pasos que presentan "Tipos de widgets" necesitan que la grilla
-    // esté visible aunque el usuario todavía no tenga ningún widget activo
-    // (su propósito es justamente invitar a activar el primero).
+    // "Tipos de widgets" solo existe visible cuando el usuario ya tiene
+    // al menos un widget activo (igual que en Wigy). Si todavía no activó
+    // ninguno, estos 2 pasos del tour no tienen sentido — se saltan en vez
+    // de forzar la grilla a aparecer artificialmente.
     if (step.target === 'widgets-section' || step.target === 'first-widget-card') {
-      const grid = $('#cbWidgetTypesGrid');
-      const empty = $('#cbWidgetTypesEmpty');
-      if (grid) grid.classList.remove('hidden');
-      if (empty) empty.classList.add('hidden');
+      const hasActive = $$('.cb-dash-activate').some(b => b.classList.contains('active'));
+      if (!hasActive) return runTourStep(index + 1);
     }
 
     targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
