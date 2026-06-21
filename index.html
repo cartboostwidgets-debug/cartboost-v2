@@ -878,56 +878,14 @@
         <!-- TIPOS DE WIDGETS -->
         <div class="cb-dash-widgets-section" data-tour-target="widgets-section">
           <h3 class="cb-dash-section-title">Tipos de widgets</h3>
-          <p class="cb-dash-empty-inline" id="cbWidgetTypesEmpty">No hay widgets</p>
-          <div class="cb-dash-widgets-grid hidden" id="cbWidgetTypesGrid">
-            <div class="cb-dash-widget-card" data-widget="countdown" data-tour-target="first-widget-card">
-              <span class="cb-dash-widget-icon">🔥</span>
-              <span class="cb-dash-widget-name">Cuenta regresiva</span>
-              <p class="cb-dash-widget-desc">Genera urgencia para vender más.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="reviews">
-              <span class="cb-dash-widget-icon">⭐</span>
-              <span class="cb-dash-widget-name">Prueba social</span>
-              <p class="cb-dash-widget-desc">Muestra actividad reciente.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="shipping">
-              <span class="cb-dash-widget-icon">🚚</span>
-              <span class="cb-dash-widget-name">Barra de envío gratis</span>
-              <p class="cb-dash-widget-desc">Incrementa el ticket promedio.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="trust">
-              <span class="cb-dash-widget-icon">🛡️</span>
-              <span class="cb-dash-widget-name">Badges de confianza</span>
-              <p class="cb-dash-widget-desc">Genera confianza en la compra.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="bundle">
-              <span class="cb-dash-widget-icon">🛒</span>
-              <span class="cb-dash-widget-name">Bundle Builder</span>
-              <p class="cb-dash-widget-desc">Armá combos para vender más.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="video">
-              <span class="cb-dash-widget-icon">🎥</span>
-              <span class="cb-dash-widget-name">Slider de videos</span>
-              <p class="cb-dash-widget-desc">Mostrá tus productos en acción.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="sticky-cart">
-              <span class="cb-dash-widget-icon">📌</span>
-              <span class="cb-dash-widget-name">Sticky Add To Cart</span>
-              <p class="cb-dash-widget-desc">Botón de compra siempre visible al hacer scroll.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
-            <div class="cb-dash-widget-card" data-widget="benefits-bar">
-              <span class="cb-dash-widget-icon">✨</span>
-              <span class="cb-dash-widget-name">Barra de beneficios</span>
-              <p class="cb-dash-widget-desc">Destacá envío, garantía y medios de pago.</p>
-              <button class="cb-dash-activate">Activar</button>
-            </div>
+          <div class="cb-dash-empty-inline-row" id="cbWidgetTypesEmptyRow">
+            <p class="cb-dash-empty-inline">No hay widgets</p>
+            <button class="cb-btn-ghost-sm" id="cbWidgetTypesCatalogBtnEmpty" data-tour-target="first-widget-card">Ver catálogo</button>
+          </div>
+          <div class="cb-dash-widget-types-summary hidden" id="cbWidgetTypesSummary">
+            <span class="cb-dash-widget-types-count" id="cbWidgetTypesActiveCount">0</span>
+            <span class="cb-dash-widget-types-label">widgets activos de <span id="cbWidgetTypesTotalCount">8</span> disponibles</span>
+            <button class="cb-btn-ghost-sm" id="cbWidgetTypesCatalogBtn">Ver catálogo</button>
           </div>
         </div>
 
@@ -981,6 +939,7 @@
             <p class="cb-dash-sub">Listado completo de los widgets activados en tu tienda.</p>
           </div>
           <div class="cb-dash-panel">
+            <h3 class="cb-dash-section-title">Tus widgets activos</h3>
             <div class="cb-widgets-list" id="cbWidgetsListView">
               <!-- Se completa dinámicamente desde app.js según los widgets activados -->
             </div>
@@ -989,6 +948,60 @@
               <p>Todavía no activaste ningún widget</p>
               <div class="cb-dash-empty-actions">
                 <button class="btn btn-primary" id="cbWidgetsViewCreateBtn">Crear widget</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cb-dash-panel">
+            <h3 class="cb-dash-section-title">Catálogo de widgets</h3>
+            <div class="cb-dash-widgets-grid" id="cbWidgetTypesGrid">
+              <div class="cb-dash-widget-card" data-widget="countdown">
+                <span class="cb-dash-widget-icon">🔥</span>
+                <span class="cb-dash-widget-name">Cuenta regresiva</span>
+                <p class="cb-dash-widget-desc">Genera urgencia para vender más.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="reviews">
+                <span class="cb-dash-widget-icon">⭐</span>
+                <span class="cb-dash-widget-name">Prueba social</span>
+                <p class="cb-dash-widget-desc">Muestra actividad reciente.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="shipping">
+                <span class="cb-dash-widget-icon">🚚</span>
+                <span class="cb-dash-widget-name">Barra de envío gratis</span>
+                <p class="cb-dash-widget-desc">Incrementa el ticket promedio.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="trust">
+                <span class="cb-dash-widget-icon">🛡️</span>
+                <span class="cb-dash-widget-name">Badges de confianza</span>
+                <p class="cb-dash-widget-desc">Genera confianza en la compra.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="bundle">
+                <span class="cb-dash-widget-icon">🛒</span>
+                <span class="cb-dash-widget-name">Bundle Builder</span>
+                <p class="cb-dash-widget-desc">Armá combos para vender más.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="video">
+                <span class="cb-dash-widget-icon">🎥</span>
+                <span class="cb-dash-widget-name">Slider de videos</span>
+                <p class="cb-dash-widget-desc">Mostrá tus productos en acción.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="sticky-cart">
+                <span class="cb-dash-widget-icon">📌</span>
+                <span class="cb-dash-widget-name">Sticky Add To Cart</span>
+                <p class="cb-dash-widget-desc">Botón de compra siempre visible al hacer scroll.</p>
+                <button class="cb-dash-activate">Activar</button>
+              </div>
+              <div class="cb-dash-widget-card" data-widget="benefits-bar">
+                <span class="cb-dash-widget-icon">✨</span>
+                <span class="cb-dash-widget-name">Barra de beneficios</span>
+                <p class="cb-dash-widget-desc">Destacá envío, garantía y medios de pago.</p>
+                <button class="cb-dash-activate">Activar</button>
               </div>
             </div>
           </div>
@@ -1139,65 +1152,7 @@
     </div>
   </div>
 
-  <!-- ============== MODAL: CREAR WIDGET ============== -->
-  <div class="cb-overlay" id="cbWidgetModalOverlay">
-    <div class="cb-modal cb-widget-modal">
-      <button class="cb-modal-close" id="cbWidgetModalClose" aria-label="Cerrar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <h2 class="cb-modal-title">Crear nuevo widget</h2>
-      <p class="cb-modal-sub">Elegí qué tipo de widget querés activar en tu tienda.</p>
-
-      <div class="cb-widget-modal-grid" id="cbWidgetModalGrid">
-        <button class="cb-widget-modal-option" data-widget="countdown" data-name="Cuenta regresiva">
-          <span class="cb-widget-modal-icon">🔥</span>
-          <span class="cb-widget-modal-name">Cuenta regresiva</span>
-          <span class="cb-widget-modal-desc">Genera urgencia para vender más.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="reviews" data-name="Prueba social">
-          <span class="cb-widget-modal-icon">⭐</span>
-          <span class="cb-widget-modal-name">Prueba social</span>
-          <span class="cb-widget-modal-desc">Muestra actividad reciente.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="shipping" data-name="Barra de envío gratis">
-          <span class="cb-widget-modal-icon">🚚</span>
-          <span class="cb-widget-modal-name">Envío gratis</span>
-          <span class="cb-widget-modal-desc">Incrementa el ticket promedio.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="trust" data-name="Badges de confianza">
-          <span class="cb-widget-modal-icon">🛡️</span>
-          <span class="cb-widget-modal-name">Badges de confianza</span>
-          <span class="cb-widget-modal-desc">Genera confianza en la compra.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="bundle" data-name="Bundle Builder">
-          <span class="cb-widget-modal-icon">🛒</span>
-          <span class="cb-widget-modal-name">Bundle Builder</span>
-          <span class="cb-widget-modal-desc">Armá combos para vender más.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="video" data-name="Slider de videos">
-          <span class="cb-widget-modal-icon">🎥</span>
-          <span class="cb-widget-modal-name">Slider de videos</span>
-          <span class="cb-widget-modal-desc">Mostrá tus productos en acción.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="sticky-cart" data-name="Sticky Add To Cart">
-          <span class="cb-widget-modal-icon">📌</span>
-          <span class="cb-widget-modal-name">Sticky Add To Cart</span>
-          <span class="cb-widget-modal-desc">Botón de compra siempre visible al hacer scroll.</span>
-        </button>
-        <button class="cb-widget-modal-option" data-widget="benefits-bar" data-name="Barra de beneficios">
-          <span class="cb-widget-modal-icon">✨</span>
-          <span class="cb-widget-modal-name">Barra de beneficios</span>
-          <span class="cb-widget-modal-desc">Destacá envío, garantía y medios de pago.</span>
-        </button>
-      </div>
-
-      <p class="cb-legal cb-widget-modal-note">
-        Al crear el widget se activa localmente en tu Dashboard. La sincronización real con tu tienda Tiendanube requiere conectar un backend de widgets (todavía no implementado).
-      </p>
-    </div>
-  </div>
-  <!-- ============== /MODAL: CREAR WIDGET ============== -->
-
   <script src="app.js"></script>
 </body>
 </html>
+
