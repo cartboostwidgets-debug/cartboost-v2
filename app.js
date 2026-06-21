@@ -1425,21 +1425,11 @@
 
     return [
       {
-        target: 'store-card',
-        title: `¡Bienvenido a CartBoost! 🚀`,
-        desc: `Detectamos la tienda: ${name}. A partir de ahora vas a gestionar tus widgets de conversión desde acá.`
-      },
-      {
         target: 'products',
-        title: 'Tus productos sincronizados',
+        title: `¡Bienvenido a CartBoost! 🚀`,
         desc: count > 0
-          ? `Ya sincronizamos ${count} producto${count === 1 ? '' : 's'} de ${name}. Se actualizan automáticamente cada vez que agregás o modificás algo en Tiendanube.`
-          : `Acá vas a ver cuántos productos tiene ${name}. Se sincronizan automáticamente con Tiendanube.`
-      },
-      {
-        target: 'sync-products',
-        title: 'Sincronización manual',
-        desc: 'Si tus productos no se actualizaron todavía, podés sincronizarlos manualmente presionando este botón.'
+          ? `Detectamos la tienda: ${name}. Ya sincronizamos ${count} producto${count === 1 ? '' : 's'}. Se actualizan automáticamente cada vez que agregás o modificás algo en Tiendanube.`
+          : `Detectamos la tienda: ${name}. Acá vas a ver cuántos productos tiene. Se sincronizan automáticamente con Tiendanube.`
       },
       {
         target: 'widgets-count',
@@ -1455,6 +1445,11 @@
         target: 'first-widget-card',
         title: 'Activá tu primer widget',
         desc: 'Tocá "Activar" en cualquier widget para encenderlo en tu tienda. Podés activar y desactivar las veces que quieras.'
+      },
+      {
+        target: 'sync-products',
+        title: 'Sincronización manual',
+        desc: 'Si tus productos no se actualizaron todavía, podés sincronizarlos manualmente presionando este botón.'
       }
     ];
   }
