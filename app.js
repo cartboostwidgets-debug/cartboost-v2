@@ -881,7 +881,7 @@
 
   if (goToDashboardBtn) {
     goToDashboardBtn.addEventListener('click', () => {
-      showDashboard(cbState.store);
+      showDashboard(cbState.store, true);
     });
   }
 
@@ -934,8 +934,11 @@
 
   let activeWidgetsCount = 0;
 
-  async function showDashboard(store) {
+  async function showDashboard(store, justConnected) {
     showScreen(dashboard);
+
+    const successBanner = $('#cbDashSuccessBanner');
+    if (successBanner) successBanner.classList.toggle('hidden', !justConnected);
 
     const data = await fetchStoreData(store && store.id);
     cbState.store = data;
@@ -1019,6 +1022,15 @@
   /* =====================================================
      SIDEBAR (mobile drawer / desktop fijo) + HAMBURGUESA
      ===================================================== */
+  // Cierre manual del banner "Tienda conectada con éxito" del Dashboard.
+  const dashSuccessBannerClose = $('#cbDashSuccessBannerClose');
+  if (dashSuccessBannerClose) {
+    dashSuccessBannerClose.addEventListener('click', () => {
+      const banner = $('#cbDashSuccessBanner');
+      if (banner) banner.classList.add('hidden');
+    });
+  }
+
   const dashHamburger = $('#cbDashHamburger');
   const sidebar = $('#cbSidebar');
   const sidebarOverlay = $('#cbSidebarOverlay');
@@ -1067,6 +1079,10 @@
     link.addEventListener('click', (e) => {
       e.preventDefault();
       closeSidebar();
+      if (link.dataset.action === 'logout') {
+        performLogout();
+        return;
+      }
       switchDashView(link.dataset.nav || 'dashboard');
     });
   });
@@ -1119,23 +1135,29 @@
     }
   });
 
+  // Cierre de sesión local: limpia el estado de onboarding guardado
+  // y vuelve a la landing. No hay backend de sesión real conectado
+  // todavía (mismo patrón ya documentado en handleEmailLogin/Register).
+  // Extraída a función para que tanto el dropdown del avatar como el
+  // ítem "Cerrar sesión" del sidebar llamen exactamente a la misma lógica.
+  function performLogout() {
+    localStorage.removeItem('cb_store_connected');
+    localStorage.removeItem('cb_store_name');
+    localStorage.removeItem('cb_tutorial_done');
+    cbState.user = null;
+    cbState.store = null;
+    showScreen(null);
+    document.body.style.overflow = '';
+    showToast('Sesión cerrada.', 'success');
+  }
+
   $$('.cb-avatar-menu-item').forEach(item => {
     item.addEventListener('click', () => {
       toggleAvatarMenu(true);
       const action = item.dataset.action;
 
       if (action === 'logout') {
-        // Cierre de sesión local: limpia el estado de onboarding guardado
-        // y vuelve a la landing. No hay backend de sesión real conectado
-        // todavía (mismo patrón ya documentado en handleEmailLogin/Register).
-        localStorage.removeItem('cb_store_connected');
-        localStorage.removeItem('cb_store_name');
-        localStorage.removeItem('cb_tutorial_done');
-        cbState.user = null;
-        cbState.store = null;
-        showScreen(null);
-        document.body.style.overflow = '';
-        showToast('Sesión cerrada.', 'success');
+        performLogout();
       } else if (action === 'account') {
         showToast('La sección "Mi cuenta" todavía no está implementada.', 'info');
       } else if (action === 'store') {
