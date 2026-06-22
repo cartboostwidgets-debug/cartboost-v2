@@ -335,7 +335,8 @@ document.getElementById('connect-tn-btn').addEventListener('click', () => {
     const authUrl =
 `https://www.tiendanube.com/apps/34476/authorize`;
   console.log(authUrl);
-    window.location.href = authUrl;
+    alert(authUrl);
+window.location.href = authUrl;
 });
 
 // =========================================================================
@@ -506,4 +507,4 @@ if (isFirebaseReady) {
             }
         }
     });
-            }
+                             }
