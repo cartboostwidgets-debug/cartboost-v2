@@ -203,6 +203,7 @@ document.getElementById('login-btn').addEventListener('click', async () => {
     showLoader();
     try {
         await auth.signInWithEmailAndPassword(email, pass);
+      alert('LOGIN OK');
         hideLoader();
     } catch (error) {
         hideLoader();
@@ -507,4 +508,4 @@ if (isFirebaseReady) {
             }
         }
     });
-                             }
+                                                                        }
