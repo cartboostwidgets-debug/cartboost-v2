@@ -508,4 +508,4 @@ if (isFirebaseReady) {
             }
         }
     });
-            }
+                }
