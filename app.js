@@ -135,11 +135,11 @@ if (isFirebaseReady) {
                         renderDashboard(user, userData);
                         switchScreen('dashboard-screen');
                     } else {
-                        switchScreen('auth-setup');
+                        switchScreen('dashboard-screen');
                     }
                 } else {
                     await createOrUpdateUser(user);
-                    switchScreen('auth-setup');
+switchScreen('dashboard-screen');
                 }
             } catch (e) {
                 console.error('❌ CartBoost: Error en Firestore (Session Listener):', e.message);
@@ -508,4 +508,4 @@ if (isFirebaseReady) {
             }
         }
     });
-                                                                        }
+            }
