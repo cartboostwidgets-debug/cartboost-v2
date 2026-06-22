@@ -4,13 +4,8 @@ const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
 require('dotenv').config();
-
-// Firebase Admin (si se usa en el intercambio de código OAuth)
-const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-service-account.json');
-admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-const db = admin.firestore();
-
+// Firebase Admin desactivado temporalmente
+let db = null;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
