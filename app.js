@@ -332,7 +332,8 @@ document.getElementById('connect-tn-btn').addEventListener('click', () => {
         alert('Debes estar logueado para conectar tu tienda.'); 
         return; 
     }
-    const authUrl = `https://www.tiendanube.com/apps/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT_URI)}`;
+    const authUrl =
+`https://www.tiendanube.com/apps/${CLIENT_ID}/authorize`;
     window.location.href = authUrl;
 });
 
@@ -504,4 +505,4 @@ if (isFirebaseReady) {
             }
         }
     });
-   }
+            }
