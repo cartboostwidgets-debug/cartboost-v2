@@ -333,7 +333,8 @@ document.getElementById('connect-tn-btn').addEventListener('click', () => {
         return; 
     }
     const authUrl =
-`https://www.tiendanube.com/apps/${CLIENT_ID}/authorize`;
+`https://www.tiendanube.com/apps/34476/authorize`;
+  console.log(authUrl);
     window.location.href = authUrl;
 });
 
