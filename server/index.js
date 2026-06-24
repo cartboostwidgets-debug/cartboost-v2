@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
-const pool = require('./db');
 const verifyFirebaseToken = require('./middleware/auth');
 const { authLimiter, oauthLimiter } = require('./middleware/rateLimit');
 const config = require('./config');
