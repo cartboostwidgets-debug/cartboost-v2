@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CartBoost</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .dash-wrapper { max-width: 600px; margin: 40px auto; padding: 0 16px; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; }
+        .dash-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
+        .dash-sub { color: #64748b; font-size: 0.9rem; }
+        .btn-logout { background: #ef4444; color: white; padding: 8px 20px; border-radius: 9999px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-logout:hover { background: #dc2626; transform: translateY(-2px); }
+        
+        .store-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 24px; }
+        .store-status { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 16px; }
+        .status-dot { width: 12px; height: 12px; background: #10b981; border-radius: 50%; display: inline-block; }
+        .store-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+        .store-row:last-child { border-bottom: none; }
+        .store-label { color: #64748b; }
+        .store-value { font-weight: 600; }
+    </style>
+</head>
+<body style="background: #f8fafc;">
+    <div class="dash-wrapper">
+        <div class="dash-header">
+            <div>
+                <h1 class="dash-title">Dashboard</h1>
+                <p class="dash-sub">Bienvenido de vuelta a CartBoost</p>
+            </div>
+            <button id="btn-logout" class="btn-logout">Cerrar sesión</button>
+        </div>
+
+        <div id="dash-content">
+            <div class="store-card">
+                <div class="store-status">
+                    <span class="status-dot"></span> Tienda conectada correctamente
+                </div>
+                <div class="store-row">
+                    <span class="store-label">Nombre de la tienda</span>
+                    <span class="store-value" id="dash-store-name">Cargando...</span>
+                </div>
+                <div class="store-row">
+                    <span class="store-label">URL de la tienda</span>
+                    <span class="store-value" id="dash-store-url">Cargando...</span>
+                </div>
+                <div class="store-row">
+                    <span class="store-label">Fecha de conexión</span>
+                    <span class="store-value" id="dash-date">Cargando...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; font-size: 0.9rem; color: #64748b;">
+            <a href="/" style="color: var(--primary); text-decoration: none; font-weight: 600;">← Volver a la landing</a>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
