@@ -16,12 +16,13 @@ import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.
 
 // ⚠️ IMPORTANTE: Reemplazar estas variables con las credenciales reales de Firebase
 const firebaseConfig = {
-    apiKey: "TU_API_KEY_DE_FIREBASE",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    projectId: "TU_PROYECTO_ID",
-    storageBucket: "TU_PROYECTO.appspot.com",
-    messagingSenderId: "TU_SENDER_ID",
-    appId: "TU_APP_ID"
+  apiKey: "AIzaSyAq9zyfd2EubmIA_MGhjmbF9jZzZBZ25XA",
+  authDomain: "cartboost-60a48.firebaseapp.com",
+  projectId: "cartboost-60a48",
+  storageBucket: "cartboost-60a48.firebasestorage.app",
+  messagingSenderId: "503544641575",
+  appId: "1:503544641575:web:c10f4c762b536b06b87602",
+  measurementId: "G-NG83JVTPN5"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -55,7 +56,7 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
             createdAt: serverTimestamp(),
             lastLogin: serverTimestamp()
         });
-        window.location.href = '/setup'; // Redirigir a setup
+        window.location.href = 'setup.html'; // Redirigir a setup
     } catch (error) {
         let msg = "Error al registrarse.";
         if (error.code === 'auth/email-already-in-use') msg = "Este email ya está registrado.";
@@ -77,7 +78,7 @@ document.getElementById('login-form')?.addEventListener('submit', async (e) => {
     btn.disabled = true; btn.textContent = "Iniciando sesión...";
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = '/setup';
+        window.location.href = 'setup.html';
     } catch (error) {
         let msg = "Credenciales incorrectas.";
         if (error.code === 'auth/user-not-found') msg = "No existe una cuenta con este email.";
@@ -111,7 +112,7 @@ document.querySelectorAll('.btn-google').forEach(btn => {
             } else {
                 await setDoc(userRef, { lastLogin: serverTimestamp() }, { merge: true });
             }
-            window.location.href = '/setup';
+            window.location.href = 'setup.html';
         } catch (error) {
             if (error.code === 'auth/popup-blocked') {
                 // Fallback para bloqueadores de popups
@@ -144,15 +145,21 @@ document.getElementById('forgot-password-link')?.addEventListener('click', async
 // --- PROTECTOR DE RUTAS (Setup y Dashboard) ---
 onAuthStateChanged(auth, (user) => {
     const path = window.location.pathname;
-    if ((path === '/setup' || path === '/dashboard') && !user) {
-        window.location.href = '/login';
+    if (
+(path.includes('setup.html') || path.includes('dashboard.html'))
+&& !user
+) {
+        window.location.href = 'login.html';
     }
-    if ((path === '/login' || path === '/register') && user) {
-        window.location.href = '/setup';
+    if (
+(path.includes('login.html') || path.includes('register.html'))
+&& user
+) {
+        window.location.href = 'setup.html';
     }
 
     // Lógica del Dashboard
-    if (path === '/dashboard' && user) {
+  if (path.includes('dashboard.html') && user) {
         loadDashboardInfo(user);
     }
 });
@@ -185,5 +192,5 @@ async function loadDashboardInfo(user) {
 // Logout (Para el dashboard)
 document.getElementById('btn-logout')?.addEventListener('click', async () => {
     await signOut(auth);
-    window.location.href = '/login';
+    window.location.href = 'login.html';
 });
