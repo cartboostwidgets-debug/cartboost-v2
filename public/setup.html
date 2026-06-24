@@ -129,10 +129,11 @@
 
             // Redirigir al endpoint real de tu backend para iniciar el flujo OAuth
             setTimeout(() => {
-                window.location.href = '/auth/nuvem';
+                window.location.href =
+'https://cartboost-v2.onrender.com/auth/nuvem?token=' + token;
             }, 1800);
         });
     </script>
 
 </body>
-                    </html>
+                            </html>
