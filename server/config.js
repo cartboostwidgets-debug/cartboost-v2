@@ -17,7 +17,6 @@ requiredEnvVars.forEach(varName => {
 });
 
 module.exports = {
-    databaseUrl: process.env.DATABASE_URL,
     firebase: {
         projectId: process.env.FIREBASE_PROJECT_ID,
         privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
