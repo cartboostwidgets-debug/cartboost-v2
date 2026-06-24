@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
-const pool = require('./db');
 const verifyFirebaseToken = require('./middleware/auth');
 const { authLimiter, oauthLimiter } = require('./middleware/rateLimit');
 const config = require('./config');
@@ -48,19 +47,6 @@ router.get('/oauth/callback', oauthLimiter, async (req, res) => {
 
         const { access_token, user_id, store_id, store_name, store_url } = tokenResponse.data;
 
-        // Guardar en PostgreSQL
-        const query = `
-            INSERT INTO stores (user_uid, store_id, store_name, store_url, access_token)
-            VALUES ($1, $2, $3, $4, $5)
-            ON CONFLICT (user_uid) DO UPDATE SET 
-                store_id = EXCLUDED.store_id,
-                store_name = EXCLUDED.store_name,
-                store_url = EXCLUDED.store_url,
-                access_token = EXCLUDED.access_token,
-                created_at = CURRENT_TIMESTAMP
-        `;
-        await pool.query(query, [req.session.uid, store_id, store_name, store_url, access_token]);
-
         // Limpiar sesión
         req.session.oauth_state = null;
         req.session.uid = null;
@@ -77,18 +63,5 @@ router.get('/oauth/callback', oauthLimiter, async (req, res) => {
 });
 
 // 3. OBTENER DATOS DE LA TIENDA PARA EL DASHBOARD
-router.get('/api/store-status', verifyFirebaseToken, async (req, res) => {
-    const uid = req.user.uid;
-    try {
-        const result = await pool.query('SELECT store_name, store_url, created_at FROM stores WHERE user_uid = $1', [uid]);
-        if (result.rows.length === 0) {
-            return res.json({ connected: false });
-        }
-        return res.json({ connected: true, data: result.rows[0] });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al consultar la base de datos' });
-    }
-});
 
 module.exports = router;
