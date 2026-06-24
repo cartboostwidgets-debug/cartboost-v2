@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const requiredEnvVars = [
-    'DATABASE_URL',
     'FIREBASE_PROJECT_ID',
     'FIREBASE_PRIVATE_KEY',
     'FIREBASE_CLIENT_EMAIL',
