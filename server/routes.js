@@ -66,7 +66,9 @@ router.get('/oauth/callback', oauthLimiter, async (req, res) => {
         req.session.uid = null;
 
         // Redirigir al Dashboard frontend
-        res.redirect('/dashboard');
+       res.redirect(
+'https://cartboostwidgets-debug.github.io/cartboost-v2/dashboard.html'
+);
 
     } catch (error) {
         console.error('Error en callback OAuth:', error.response?.data || error.message);
